@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欢迎使用 极氪AI - AI API 聚合与智能分发平台</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background-color: #f9fafb; /* Slightly lighter background */
+            color: #374151; /* Darker gray for text */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 1024px; /* Slightly wider container */
+            width: 100%;
+            margin: 0 auto;
+            padding: 30px 35px; /* Increased padding */
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08); /* Softer shadow */
+        }
+        header {
+            text-align: center;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 40px;
+        }
+        header h1 {
+            font-size: 2.8em; /* Larger H1 */
+            color: #1d4ed8; /* Zeekr Blue (example, adjust as needed) */
+            margin-bottom: 0.5em;
+            font-weight: 700; /* Bolder */
+        }
+        header .tagline {
+            font-size: 1.35em;
+            color: #4b5563; /* Medium gray */
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+        header .intro-text {
+            font-size: 1.1em;
+            color: #4b5563;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+        section {
+            margin-bottom: 40px;
+        }
+        h2 {
+            font-size: 2.1em; /* Larger H2 */
+            color: #1e3a8a; /* Darker Zeekr Blue */
+            border-bottom: 2px solid #2563eb; /* Brighter blue underline */
+            padding-bottom: 15px;
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        .section-intro {
+            font-size: 1.1em;
+            color: #4b5563;
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+        .value-prop-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .value-prop-list li {
+            margin-bottom: 20px;
+            padding-left: 30px;
+            position: relative;
+        }
+        .value-prop-list li::before {
+            content: '✔'; /* Or a more theme-specific icon */
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .value-prop-list h4 {
+            font-size: 1.25em;
+            color: #1e3a8a;
+            margin-top: 0;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .value-prop-list p {
+            font-size: 1em;
+            color: #4b5563;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust minmax for 2 or 3 columns */
+            gap: 30px;
+        }
+        .feature-card {
+            background-color: #f9fafb; /* Light background for cards */
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            display: flex;
+            flex-direction: column;
+        }
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        }
+        .feature-card h3 {
+            font-size: 1.4em;
+            color: #1d4ed8;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .feature-card p {
+            font-size: 1em;
+            color: #4b5563;
+            margin-bottom: 0;
+            flex-grow: 1;
+            line-height: 1.7;
+        }
+        .emoji {
+            margin-right: 12px;
+            font-size: 1.15em; /* Slightly larger emoji */
+        }
+        .quick-start ol {
+            list-style-position: inside;
+            padding-left: 5px;
+        }
+        .quick-start li {
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            background-color: #eff6ff; /* Lighter blue for quick start items */
+            border-left: 4px solid #2563eb;
+            border-radius: 0 6px 6px 0;
+            font-size: 1.05em;
+        }
+        .quick-start li strong {
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+        .use-cases ul {
+            list-style: disc;
+            padding-left: 25px;
+            font-size: 1.05em;
+            color: #4b5563;
+        }
+        .use-cases li {
+            margin-bottom: 10px;
+        }
+        .developer-focus p {
+            font-size: 1.1em;
+            color: #374151;
+            background-color: #e0f2fe; /* Light cyan background */
+            padding: 20px;
+            border-left: 5px solid #0ea5e9; /* Cyan border */
+            border-radius: 8px;
+        }
+        .developer-focus strong {
+            color: #075985; /* Darker cyan */
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #e5e7eb;
+            font-size: 0.98em;
+            color: #6b7280; /* Lighter gray for footer */
+        }
+        footer p {
+            margin-bottom: 10px;
+        }
+        footer a {
+            color: #1d4ed8;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 900px) {
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+        @media (max-width: 768px) {
+            body {
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+            .container {
+                margin: 20px;
+                padding: 25px;
+            }
+            header h1 {
+                font-size: 2.4em;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+        }
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2em;
+            }
+            header .tagline {
+                font-size: 1.15em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+            .feature-card h3 {
+                font-size: 1.25em;
+            }
+            .quick-start li {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><span class="emoji">⚡</span>欢迎使用 极氪AI</h1>
+            <p class="tagline">驱动下一代智能应用的强大引擎。<br>您的一站式 AI API 聚合、优化与智能分发中枢。</p>
+            <p class="intro-text">
+                极氪AI 致力于为开发者与企业提供一个前所未有般简洁、极致高效且高度可靠的解决方案，帮助您无缝集成全球领先的 AI 模型，专注于业务创新，加速智能应用的落地与迭代。
+            </p>
+        </header>
+
+        <section id="why-zeekr-ai">
+            <h2>为何选择 极氪AI？</h2>
+            <p class="section-intro">我们深知在快速发展的 AI 时代，效率、成本和稳定性是您成功的关键。极氪AI 通过以下核心价值为您赋能：</p>
+            <ul class="value-prop-list">
+                <li>
+                    <h4><span class="emoji">🎯</span>极致的便捷性</h4>
+                    <p>通过统一的 API 接口，告别繁琐的多供应商适配工作。数分钟内即可完成集成，让您专注于核心业务逻辑，而非底层接口的复杂性。</p>
+                </li>
+                <li>
+                    <h4><span class="emoji">📈</span>卓越的性能与成本效益</h4>
+                    <p>智能路由与动态负载均衡技术，确保请求高效分配至最佳可用渠道。透明化的模型定价与精细化用量控制，助您显著优化 AI 服务成本。</p>
+                </li>
+                <li>
+                    <h4><span class="emoji">🛡️</span>企业级可靠性与安全性</h4>
+                    <p>基于稳健的架构设计，提供高可用服务保障。精细的访问令牌与权限管理机制，确保您的数据与服务安全无虞，满足企业级应用需求。</p>
+                </li>
+                <li>
+                    <h4><span class="emoji">👨‍💻</span>开发者优先</h4>
+                    <p>我们提供清晰详尽的 API 文档、易于集成的 SDK (规划中) 以及活跃的社区支持，致力于为开发者打造极致流畅与高效的开发体验。</p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="core-features">
+            <h2><span class="emoji">🌟</span>极氪AI 核心功能一览</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3><span class="emoji">🌐</span>多渠道模型聚合</h3>
+                    <p>轻松集成并管理来自 OpenAI (GPT系列), Azure OpenAI, Anthropic (Claude系列), Google (PaLM/Gemini), 百度文心一言, 阿里通义千问, 讯飞星火等全球主流及自定义 API 渠道。</p>
+                </div>
+                <div class="feature-card">
+                    <h3><span class="emoji">🔗</span>统一标准化访问</h3>
+                    <p>通过极氪AI 提供的统一 API 格式调用不同供应商的模型，大幅降低集成难度与维护成本，实现模型间的无缝切换与灵活调度。</p>
+                </div>
+                <div class="feature-card">
+                    <h3><span class="emoji">💡</span>智能路由与负载均衡</h3>
+                    <p>根据渠道的实时可用性、响应速度、自定义权重或成本策略，智能分配 API 请求，确保服务的高可用性与最佳性能表现。</p>
+                </div>
+                <div class="feature-card">
+                    <h3><span class="emoji">🔑</span>精细化额度与权限控制</h3>
+                    <p>为不同用户、应用或项目组设置独立的访问令牌 (API Keys)，并配置精细化的调用额度、模型访问权限及速率限制，有效管理资源消耗。</p>
+                </div>
+                <div class="feature-card">
+                    <h3><span class="emoji">📊</span>全方位日志与数据分析</h3>
+                    <p>实时记录每一次 API 调用日志，提供多维度的用量统计、成本分析与性能监控报表，帮助您洞察使用模式，优化资源配置与决策。</p>
+                </div>
+                <div class="feature-card">
+                    <h3><span class="emoji">💰</span>灵活计费与自定义定价</h3>
+                    <p>支持自定义不同模型的计费倍率，可针对不同用户分组设置差异化定价策略，满足多样化的商业运营需求，并支持预付费和按量付费模式。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="use-cases" class="use-cases">
+            <h2><span class="emoji">🚀</span>赋能您的创新应用</h2>
+            <p class="section-intro">无论您正在构建何种类型的 AI 应用，极氪AI 都能提供强大的支持：</p>
+            <ul>
+                <li>构建更智能、响应更迅速的客户服务聊天机器人。</li>
+                <li>自动化生成高质量的营销文案、博客文章、产品描述等内容。</li>
+                <li>加速软件开发流程，通过 AI 辅助生成代码、测试用例和技术文档。</li>
+                <li>从海量非结构化数据中提取有价值的洞察，进行情感分析、摘要生成。</li>
+                <li>打造个性化的推荐系统，提升用户参与度和转化率。</li>
+                <li>实现多语言内容的实时翻译与本地化，拓展全球市场。</li>
+                <li>以及更多需要强大、灵活 AI 模型支持的自定义解决方案...</li>
+            </ul>
+        </section>
+
+        <section id="quick-start" class="quick-start">
+            <h2><span class="emoji">🛠️</span>三步快速开始</h2>
+            <ol>
+                <li><strong>配置渠道：</strong>前往「渠道管理」模块，轻松添加并验证您的上游 AI 服务 API 密钥。</li>
+                <li><strong>创建令牌：</strong>在「令牌管理」中，为您的应用或用户创建专属访问令牌，并分配合适的权限与额度。</li>
+                <li><strong>开始调用：</strong>使用生成的令牌，通过 <strong>极氪AI</strong> 提供的统一API接口，即刻开始调用强大的AI模型！</li>
+            </ol>
+        </section>
+        
+        <section id="developer-focus" class="developer-focus">
+            <h2><span class="emoji">💡</span>为开发者而生</h2>
+            <p>极氪AI 深知开发者的需求。我们致力于提供<strong>简洁明了的API接口</strong>、<strong>完善的文档支持</strong>以及<strong>积极响应的社区</strong>，让您能够专注于创新，而非繁琐的集成工作。您的成功就是我们的目标。</p>
+        </section>
+
+        <footer>
+            <p>© <span id="currentYear"></span> 极氪AI. 版权所有. (灵感源自 One API, Calcium-Ion 及其他优秀开源项目)</p>
+            <p>
+                联系我们: <a href="mailto:hubentuan@gmail.com">hubentuan@gmail.com</a> |
+                Telegram: <a href="https://t.me/XiaoYao16L" target="_blank" rel="noopener noreferrer">XiaoYao16L官方交流群</a>
+            </p>
+            <p>
+                 <a href="#" target="_blank" rel="noopener noreferrer">服务条款 (占位)</a> |
+                 <a href="#" target="_blank" rel="noopener noreferrer">隐私政策 (占位)</a>
+            </p>
+        </footer>
+    </div>
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
