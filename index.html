@@ -7,18 +7,21 @@
     <style>
         :root {
             /* Light Mode Variables */
-            --bg-color: #f0f4f8; /* Lighter, cooler background */
+            --bg-color: #f0f4f8;
             --bg-gradient-start: #e0eafc;
             --bg-gradient-end: #cfdef3;
             --card-bg-color: #ffffff;
-            --text-color-primary: #1f2937; /* Darker for better contrast */
+            --text-color-primary: #1f2937;
             --text-color-secondary: #4b5563;
-            --text-color-accent: #007bff; /* Primary accent */
+            --text-color-accent: #007bff;
             --text-color-accent-dark: #0056b3;
             --border-color: #d1d5db;
             --shadow-color: rgba(0, 0, 0, 0.06);
-            --highlight-bg: #e0f2fe; /* For developer focus section */
+            --highlight-bg: #e0f2fe;
             --highlight-border: #7dd3fc;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
 
             --font-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
             --border-radius: 12px;
@@ -28,18 +31,21 @@
         @media (prefers-color-scheme: dark) {
             :root {
                 /* Dark Mode Variables */
-                --bg-color: #111827; /* Dark background */
+                --bg-color: #111827;
                 --bg-gradient-start: #1f2937;
                 --bg-gradient-end: #374151;
-                --card-bg-color: #1f2937; /* Darker cards */
-                --text-color-primary: #f3f4f6; /* Light text */
+                --card-bg-color: #1f2937;
+                --text-color-primary: #f3f4f6;
                 --text-color-secondary: #9ca3af;
-                --text-color-accent: #60a5fa; /* Lighter accent for dark mode */
+                --text-color-accent: #60a5fa;
                 --text-color-accent-dark: #3b82f6;
-                --border-color: #374151; /* Darker borders */
+                --border-color: #374151;
                 --shadow-color: rgba(0, 0, 0, 0.2);
                 --highlight-bg: #1e293b;
                 --highlight-border: #38bdf8;
+                --success-color: #34d399; /* Lighter green for dark mode */
+                --warning-color: #f59e0b; /* Lighter yellow */
+                --danger-color: #f87171;  /* Lighter red */
             }
         }
 
@@ -52,11 +58,10 @@
             color: var(--text-color-secondary);
             min-height: 100vh;
             box-sizing: border-box;
-            overflow-x: hidden; /* Prevent horizontal scroll from animations */
-            position: relative; /* For ::before pseudo-element */
+            overflow-x: hidden;
+            position: relative;
         }
 
-        /* Animated Gradient Background */
         body::before {
             content: '';
             position: fixed;
@@ -76,7 +81,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Subtle Floating Shapes (CSS only, very lightweight) */
         .floating-shapes {
             position: fixed;
             top: 0;
@@ -85,7 +89,7 @@
             height: 100%;
             overflow: hidden;
             z-index: -1;
-            pointer-events: none; /* Allow clicks through */
+            pointer-events: none;
         }
         .floating-shapes span {
             position: absolute;
@@ -94,9 +98,9 @@
             width: 20px;
             height: 20px;
             background: var(--text-color-accent);
-            opacity: 0.1; /* Very subtle */
+            opacity: 0.1;
             animation: float 25s linear infinite;
-            bottom: -150px; /* Start off-screen */
+            bottom: -150px;
             border-radius: 50%;
         }
         .floating-shapes span:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; animation-duration: 20s; }
@@ -112,11 +116,11 @@
 
         @keyframes float {
             0% { transform: translateY(0) rotate(0deg); }
-            100% { transform: translateY(-120vh) rotate(720deg); } /* Move far up */
+            100% { transform: translateY(-120vh) rotate(720deg); }
         }
 
 
-        .container-wrapper { /* New wrapper for main content area */
+        .container-wrapper {
             padding-top: 50px;
             padding-bottom: 50px;
             width:100%;
@@ -127,10 +131,10 @@
             width: calc(100% - 40px);
             margin: 0 auto;
             padding: 35px 40px;
-            background-color: var(--card-bg-color); /* Use card-bg for container too */
+            background-color: var(--card-bg-color);
             border-radius: var(--border-radius);
-            box-shadow: 0 10px 30px var(--shadow-color); /* Enhanced shadow */
-            position: relative; /* For stacking context */
+            box-shadow: 0 10px 30px var(--shadow-color);
+            position: relative;
             z-index: 1;
         }
 
@@ -168,12 +172,12 @@
         }
 
         section {
-            margin-bottom: 60px; /* Increased spacing */
-            opacity: 0; /* For reveal animation */
-            transform: translateY(40px); /* For reveal animation */
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(40px);
             transition: opacity 0.8s var(--transition-speed) ease-out, transform 0.8s var(--transition-speed) ease-out;
         }
-        section.visible { /* Class added by JS */
+        section.visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -184,7 +188,7 @@
             border-bottom: 3px solid var(--text-color-accent);
             padding-bottom: 18px;
             margin-top: 0;
-            margin-bottom: 40px; /* Increased spacing */
+            margin-bottom: 40px;
             font-weight: 600;
             text-align: center;
         }
@@ -198,7 +202,7 @@
 
 
         .section-intro {
-            font-size: 1.2em; /* Slightly larger */
+            font-size: 1.2em;
             color: var(--text-color-secondary);
             margin-bottom: 35px;
             line-height: 1.8;
@@ -214,7 +218,7 @@
             gap: 30px;
         }
         .value-prop-item {
-            background-color: var(--card-bg-color); /* Match container bg */
+            background-color: var(--card-bg-color);
             padding: 30px;
             border-radius: var(--border-radius);
             border-left: 5px solid var(--text-color-accent);
@@ -242,7 +246,7 @@
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 35px; /* Increased gap */
+            gap: 35px;
         }
 
         .feature-card {
@@ -259,16 +263,14 @@
 
         .feature-card:hover {
             transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.12); /* More pronounced shadow on hover */
-             /* Dark mode specific hover shadow */
-            box-shadow: @media (prefers-color-scheme: dark) { 0 12px 25px rgba(0,0,0,0.25); };
+        }
+         /* Dynamic shadow for dark/light mode hover */
+        @media (prefers-color-scheme: light) {
+            .feature-card:hover { box-shadow: 0 12px 25px rgba(0,0,0,0.12); }
         }
         @media (prefers-color-scheme: dark) {
-            .feature-card:hover {
-                box-shadow: 0 12px 25px rgba(0,0,0,0.25);
-            }
+            .feature-card:hover { box-shadow: 0 12px 25px rgba(0,0,0,0.25); }
         }
-
 
         .feature-card h3 {
             font-size: 1.55em;
@@ -280,7 +282,7 @@
          .feature-card h3 .emoji {
             font-size: 1em;
             margin-right: 10px;
-            display: inline-block; /* For transform */
+            display: inline-block;
             transition: transform var(--transition-speed) ease;
          }
          .feature-card:hover h3 .emoji {
@@ -329,8 +331,8 @@
             top: 50%;
             transform: translateY(-50%);
             background-color: var(--text-color-accent);
-            color: var(--card-bg-color); /* Text color for counter for contrast */
-            width: 35px; /* Larger counter */
+            color: var(--card-bg-color);
+            width: 35px;
             height: 35px;
             border-radius: 50%;
             display: flex;
@@ -345,6 +347,105 @@
             color: var(--text-color-accent-dark);
             font-weight: 600;
         }
+        
+        /* API Endpoint & Latency Test Section */
+        #api-endpoint-test .section-intro {
+            margin-bottom: 30px;
+        }
+
+        .endpoint-display {
+            background-color: color-mix(in srgb, var(--card-bg-color) 90%, var(--highlight-bg) 10%);
+            border: 1px solid var(--border-color);
+            padding: 18px 22px; /* Adjusted padding */
+            border-radius: var(--border-radius);
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            font-size: 1.1em;
+            color: var(--text-color-primary);
+            margin-bottom: 30px; /* Increased margin */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            word-break: break-all;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .endpoint-display code {
+            flex-grow: 1;
+            margin-right: 10px; /* Space before button */
+        }
+
+        #copy-api-url-btn {
+            background-color: var(--text-color-accent);
+            color: var(--card-bg-color);
+            border: none;
+            padding: 10px 18px; /* Slightly larger button */
+            border-radius: calc(var(--border-radius) - 4px); /* Slightly less rounded */
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 500;
+            margin-left: 15px;
+            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+            white-space: nowrap;
+            flex-shrink: 0; /* Prevent button from shrinking */
+        }
+
+        #copy-api-url-btn:hover {
+            background-color: var(--text-color-accent-dark);
+            transform: scale(1.03);
+        }
+        #copy-api-url-btn:disabled {
+            background-color: var(--text-color-secondary);
+            cursor: default;
+            transform: none;
+        }
+        #copy-api-url-btn .emoji {
+            margin-right: 6px;
+            font-size: 1em;
+            vertical-align: text-bottom;
+        }
+
+        .latency-test-area {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-top: 10px; /* Add some top margin */
+        }
+
+        #test-latency-btn {
+            background-image: linear-gradient(45deg, var(--text-color-accent), var(--text-color-accent-dark));
+            color: white; /* Ensure contrast on gradient */
+            border: none;
+            padding: 14px 28px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            box-shadow: 0 4px 10px var(--shadow-color);
+        }
+
+        #test-latency-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px var(--shadow-color);
+        }
+        #test-latency-btn:active {
+            transform: translateY(-1px);
+        }
+
+        #latency-result {
+            font-size: 1.15em;
+            font-weight: 600; /* Bolder result */
+            color: var(--text-color-secondary);
+            min-width: 200px;
+            text-align: left;
+            background-color: var(--highlight-bg);
+            padding: 10px 15px;
+            border-radius: calc(var(--border-radius) - 4px);
+            border: 1px solid var(--border-color);
+        }
+
 
         .use-cases ul {
             columns: 2;
@@ -372,9 +473,9 @@
 
         .developer-focus, .our-vision {
             background-color: var(--highlight-bg);
-            padding: 35px; /* Increased padding */
+            padding: 35px;
             border-radius: var(--border-radius);
-            border-left: 6px solid var(--text-color-accent); /* Match accent color */
+            border-left: 6px solid var(--text-color-accent);
             text-align: center;
             box-shadow: 0 4px 10px var(--shadow-color);
         }
@@ -390,12 +491,12 @@
 
         footer {
             text-align: center;
-            margin-top: 70px; /* Increased spacing */
+            margin-top: 70px;
             padding-top: 40px;
             border-top: 1px solid var(--border-color);
             font-size: 1em;
-            color: var(--text-color-secondary); /* Slightly darker footer text */
-            position: relative; /* For stacking context */
+            color: var(--text-color-secondary);
+            position: relative;
             z-index: 1;
         }
 
@@ -449,6 +550,15 @@
             .feature-card h3 {
                 font-size: 1.4em;
             }
+            .endpoint-display {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            #copy-api-url-btn {
+                margin-left: 0;
+                align-self: flex-start; /* Align button to start on new line */
+            }
         }
 
         @media (max-width: 480px) {
@@ -466,6 +576,17 @@
             }
              .developer-focus p, .our-vision p {
                 font-size: 1.1em;
+            }
+            .latency-test-area {
+                flex-direction: column;
+                align-items: stretch; /* Make button and result full width */
+            }
+            #test-latency-btn {
+                width: 100%;
+            }
+            #latency-result {
+                text-align: center; /* Center text in result box */
+                min-width: auto;
             }
         }
     </style>
@@ -538,6 +659,21 @@
                     </div>
                 </div>
             </section>
+            
+            <section id="api-endpoint-test" class="reveal">
+                <h2><span class="emoji">🔗</span> 您的专属API端点</h2>
+                <p class="section-intro">
+                    通过以下统一API端点，即可开始调用极氪AI聚合的强大模型。我们建议您在集成前测试与服务器的连接延迟，以获得最佳体验。
+                </p>
+                <div class="endpoint-display reveal">
+                    <code id="api-url-text">https://api.lhfcb.com/v1/chat/completions</code>
+                    <button id="copy-api-url-btn" title="复制API端点"><span class="emoji">📋</span>复制</button>
+                </div>
+                <div class="latency-test-area reveal">
+                    <button id="test-latency-btn">测试与服务器连接延迟</button>
+                    <p id="latency-result">延迟：-- ms</p>
+                </div>
+            </section>
 
             <section id="use-cases" class="use-cases reveal">
                 <h2><span class="emoji">🚀</span>赋能您的多元化创新</h2>
@@ -588,23 +724,120 @@
 
         // Scroll Reveal Animation
         const revealElements = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries, observer) => {
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    // Optional: Unobserve after revealing to save resources
-                    // observer.unobserve(entry.target);
                 }
             });
         }, {
-            root: null, // relative to the viewport
-            threshold: 0.1, // 10% of the element is visible
-            rootMargin: '0px 0px -50px 0px' // Trigger a bit earlier
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
         });
 
         revealElements.forEach(el => {
             revealObserver.observe(el);
         });
+
+        // API Endpoint & Latency Test Logic
+        const testLatencyBtn = document.getElementById('test-latency-btn');
+        const latencyResultEl = document.getElementById('latency-result');
+        const apiUrlToTest = 'https://api.lhfcb.com/v1/chat/completions'; 
+
+        if (testLatencyBtn && latencyResultEl) {
+            testLatencyBtn.addEventListener('click', async () => {
+                latencyResultEl.textContent = '延迟：正在测试...';
+                latencyResultEl.style.color = 'var(--text-color-secondary)';
+
+                const startTime = performance.now();
+
+                try {
+                    // Using OPTIONS as it's less intrusive for a POST endpoint.
+                    // 'mode: cors' is crucial for getting actual timing from cross-origin.
+                    const response = await fetch(apiUrlToTest, {
+                        method: 'OPTIONS', 
+                        mode: 'cors',   
+                        cache: 'no-cache' 
+                    });
+
+                    const endTime = performance.now();
+                    const latency = Math.round(endTime - startTime);
+                    
+                    // We got a response, even if it's a 405 (Method Not Allowed for OPTIONS)
+                    // or other non-2xx, it means the server is reachable.
+                    // The fetch promise resolves for HTTP errors (like 4xx, 5xx).
+                    // It only rejects on network errors or if CORS prevents access.
+                    latencyResultEl.textContent = `延迟：${latency} ms`;
+                    if (latency < 150) { // Adjusted thresholds
+                        latencyResultEl.style.color = 'var(--success-color)';
+                    } else if (latency < 400) {
+                        latencyResultEl.style.color = 'var(--warning-color)';
+                    } else {
+                        latencyResultEl.style.color = 'var(--danger-color)';
+                    }
+
+                } catch (error) {
+                    // This block catches network errors (server down, DNS issues) 
+                    // OR CORS errors that prevent even getting a response.
+                    const endTime = performance.now(); 
+                    const latencyAttempt = Math.round(endTime - startTime);
+                    console.error('Latency test error:', error);
+                    if (error.name === 'TypeError' && error.message.toLowerCase().includes('failed to fetch')) {
+                         // This often indicates a CORS issue or network problem before a response could be processed.
+                         latencyResultEl.textContent = '延迟：无法连接或CORS策略限制';
+                    } else {
+                         latencyResultEl.textContent = `延迟：测试失败 (${latencyAttempt}ms)`;
+                    }
+                    latencyResultEl.style.color = 'var(--danger-color)';
+                }
+            });
+        }
+
+        // Copy to clipboard functionality
+        const copyApiUrlBtn = document.getElementById('copy-api-url-btn');
+        const apiUrlTextEl = document.getElementById('api-url-text');
+
+        if (copyApiUrlBtn && apiUrlTextEl) {
+            copyApiUrlBtn.addEventListener('click', () => {
+                const textToCopy = apiUrlTextEl.textContent.trim();
+                navigator.clipboard.writeText(textToCopy)
+                    .then(() => {
+                        const originalHTML = copyApiUrlBtn.innerHTML;
+                        copyApiUrlBtn.innerHTML = '<span class="emoji">✅</span>已复制!';
+                        copyApiUrlBtn.disabled = true;
+                        setTimeout(() => {
+                            copyApiUrlBtn.innerHTML = originalHTML;
+                            copyApiUrlBtn.disabled = false;
+                        }, 2000);
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy API URL:', err);
+                        // Fallback for older browsers or if clipboard API fails
+                        try {
+                            const textArea = document.createElement("textarea");
+                            textArea.value = textToCopy;
+                            document.body.appendChild(textArea);
+                            textArea.focus();
+                            textArea.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(textArea);
+                            
+                            const originalHTML = copyApiUrlBtn.innerHTML;
+                            copyApiUrlBtn.innerHTML = '<span class="emoji">✅</span>已复制!';
+                            copyApiUrlBtn.disabled = true;
+                            setTimeout(() => {
+                                copyApiUrlBtn.innerHTML = originalHTML;
+                                copyApiUrlBtn.disabled = false;
+                            }, 2000);
+
+                        } catch (fallbackErr) {
+                            alert('复制失败，请手动复制。');
+                            console.error('Fallback copy failed:', fallbackErr);
+                        }
+                    });
+            });
+        }
+
     </script>
 </body>
 </html>
