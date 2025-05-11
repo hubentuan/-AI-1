@@ -3,505 +3,597 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>极氪AI - 赋能未来的智能API中枢</title>
+    <title>极氪AI - 驱动未来的智能API中枢</title>
     <style>
+        /* Import Inter font (optional, but gives a modern feel) */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
         :root {
             /* Default to Light Mode Variables */
-            --bg-color: #eef2f7; /* Cooler, more tech-like light bg */
-            --bg-gradient-start: #dde6ed;
-            --bg-gradient-end: #c2d3e6;
-            --card-bg-color: #ffffff;
-            --text-color-primary: #1a202c; /* Slightly darker primary text */
-            --text-color-secondary: #4a5568;
-            --text-color-accent: #3182ce; /* A refined blue */
-            --text-color-accent-dark: #2b6cb0;
-            --text-color-accent-rgb: 49, 130, 206; /* For RGBA usage */
-            --border-color: #cbd5e0;
-            --shadow-color: rgba(45, 55, 72, 0.1); /* Softer shadow */
-            --highlight-bg: #ebf8ff;
-            --highlight-border: #90cdf4;
-            --success-color: #38a169;
-            --warning-color: #dd6b20;
-            --danger-color: #c53030;
-            --button-glow-color: rgba(49, 130, 206, 0.4);
+            --font-primary: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            
+            --bg-color: #f4f7f9; /* Even cooler light background */
+            --bg-gradient-start: #e9f0f8;
+            --bg-gradient-end: #d7e3f2;
+            --bg-grid-color: rgba(0, 123, 255, 0.05); /* Subtle blue grid */
 
-            --font-sans-serif: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-            --border-radius: 10px; /* Slightly reduced for sharper tech look */
-            --transition-speed: 0.3s;
-            --transition-bezier: cubic-bezier(0.25, 0.8, 0.25, 1);
+            --card-bg-color: rgba(255, 255, 255, 0.9); /* Slightly transparent for glass effect */
+            --card-border-color: rgba(0, 0, 0, 0.08);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+
+            --text-color-primary: #1a202c;
+            --text-color-secondary: #4a5568;
+            --text-color-heading: #111827; /* Darker for headings */
+            
+            --accent-primary: #007AFF; /* Classic Apple Blue */
+            --accent-primary-dark: #0056b3;
+            --accent-primary-rgb: 0, 123, 255;
+            --accent-secondary: #34c759; /* Green for success/positive actions */
+
+            --border-radius-md: 12px;
+            --border-radius-lg: 16px;
+
+            --transition-fast: 0.2s;
+            --transition-medium: 0.35s;
+            --transition-slow: 0.5s;
+            --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+            
+            --success-color: var(--accent-secondary);
+            --warning-color: #ff9f0a;
+            --danger-color: #ff3b30;
         }
 
         body.dark-mode {
-            /* Dark Mode Variables */
-            --bg-color: #0a0f1a; /* Very dark blue/black */
-            --bg-gradient-start: #101626;
-            --bg-gradient-end: #1a2236;
-            --card-bg-color: #171e2e; /* Dark cards */
-            --text-color-primary: #e2e8f0;
-            --text-color-secondary: #a0aec0;
-            --text-color-accent: #63b3ed;
-            --text-color-accent-dark: #4299e1;
-            --text-color-accent-rgb: 99, 179, 237;
-            --border-color: #2d3748;
-            --shadow-color: rgba(0, 0, 0, 0.3);
-            --highlight-bg: #242c3d;
-            --highlight-border: #4a5a7a;
-            --success-color: #48bb78;
-            --warning-color: #f6ad55;
-            --danger-color: #fc8181;
-            --button-glow-color: rgba(99, 179, 237, 0.3);
-        }
-        /* Import Inter font (optional, but gives a modern feel) */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+            --bg-color: #0d1117; /* GitHub Dark Dimmed like */
+            --bg-gradient-start: #101827;
+            --bg-gradient-end: #182134;
+            --bg-grid-color: rgba(59, 130, 246, 0.06); /* Subtle blue grid for dark */
 
+            --card-bg-color: rgba(28, 35, 48, 0.85); /* Darker, semi-transparent cards */
+            --card-border-color: rgba(255, 255, 255, 0.1);
+            --card-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+
+            --text-color-primary: #c9d1d9;
+            --text-color-secondary: #8b949e;
+            --text-color-heading: #f0f6fc;
+            
+            --accent-primary: #3b82f6; /* Brighter blue for dark mode */
+            --accent-primary-dark: #2563eb;
+            --accent-primary-rgb: 59, 130, 246;
+            --accent-secondary: #4ade80;
+
+            --success-color: var(--accent-secondary);
+            --warning-color: #fbbf24;
+            --danger-color: #f87171;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
 
         body {
-            font-family: var(--font-sans-serif);
-            line-height: 1.75;
+            font-family: var(--font-primary);
+            line-height: 1.7;
             margin: 0;
             padding: 0;
             background-color: var(--bg-color);
             color: var(--text-color-secondary);
             min-height: 100vh;
-            box-sizing: border-box;
             overflow-x: hidden;
             position: relative;
-            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color var(--transition-medium) var(--ease-out-quad), color var(--transition-medium) var(--ease-out-quad);
         }
 
-        /* Animated Gradient Background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -3; /* Deepest layer */
-            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
-            background-size: 300% 300%;
-            animation: gradientAnimation 25s ease infinite;
-            transition: background var(--transition-speed) ease;
-        }
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Tech Grid Background Layer */
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -2; /* Above gradient */
-            background-image:
-                linear-gradient(to right, rgba(var(--text-color-accent-rgb), 0.04) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(var(--text-color-accent-rgb), 0.04) 1px, transparent 1px);
-            background-size: 40px 40px; /* Size of grid cells */
-            animation: moveGrid 90s linear infinite; /* Slower movement */
-            opacity: 0.7;
-            transition: background-image var(--transition-speed) ease;
-        }
-        @keyframes moveGrid {
-            0% { background-position: 0 0; }
-            100% { background-position: -1440px -1440px; }
-        }
-
-
-        .floating-shapes {
+        /* Background Layers */
+        .background-layers {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            overflow: hidden; z-index: -1; pointer-events: none;
+            z-index: -10; pointer-events: none;
         }
-        .floating-shapes span {
-            position: absolute; display: block; list-style: none;
-            width: 20px; height: 20px;
-            background: rgba(var(--text-color-accent-rgb), 0.1); /* Use RGB for opacity */
-            animation: float 25s linear infinite;
-            bottom: -180px; border-radius: 50%;
-            transition: background var(--transition-speed) ease;
+        .bg-gradient {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+            background-size: 250% 250%;
+            animation: gradientFlow 20s ease infinite alternate;
+            transition: background var(--transition-medium) var(--ease-out-quad);
         }
-        /* ... (keep existing .floating-shapes span:nth-child styles for variety) ... */
-        .floating-shapes span:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; animation-duration: 20s; }
-        .floating-shapes span:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
-        .floating-shapes span:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
-        .floating-shapes span:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
-        .floating-shapes span:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
-        .floating-shapes span:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; opacity: 0.05; }
-        .floating-shapes span:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; opacity: 0.08;}
-        .floating-shapes span:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
-        .floating-shapes span:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
-        .floating-shapes span:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 22s; opacity: 0.06;}
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        .bg-grid {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image:
+                linear-gradient(to right, var(--bg-grid-color) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--bg-grid-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridPan 120s linear infinite;
+            opacity: 0.6;
+            transition: background-image var(--transition-medium) var(--ease-out-quad);
+        }
+        @keyframes gridPan {
+            0% { background-position: 0 0; }
+            100% { background-position: -1500px -1500px; }
+        }
 
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); opacity: inherit; }
-            50% { opacity: calc(inherit * 0.5); } /* Fade slightly mid-way */
-            100% { transform: translateY(-130vh) rotate(720deg); opacity: 0; }
-        }
-
-        .container-wrapper {
-            padding-top: 60px; padding-bottom: 60px; width:100%;
-        }
+        .container-wrapper { padding: 70px 0; width:100%; }
         .container {
-            max-width: 1140px; width: calc(100% - 40px); margin: 0 auto;
-            padding: 40px 45px; background-color: var(--card-bg-color);
-            border-radius: var(--border-radius);
-            box-shadow: 0 15px 40px var(--shadow-color);
+            max-width: 1180px; width: calc(100% - 40px); margin: 0 auto;
+            padding: 40px 50px;
+            background-color: var(--card-bg-color);
+            backdrop-filter: blur(12px) saturate(150%); /* Glassmorphism */
+            -webkit-backdrop-filter: blur(12px) saturate(150%);
+            border: 1px solid var(--card-border-color);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--card-shadow);
             position: relative; z-index: 1;
-            transition: background-color var(--transition-speed) ease;
+            transition: background-color var(--transition-medium) var(--ease-out-quad), border-color var(--transition-medium) var(--ease-out-quad);
         }
 
-        header {
-            text-align: center; padding-bottom: 40px;
-            border-bottom: 1px solid var(--border-color); margin-bottom: 60px;
-            transition: border-color var(--transition-speed) ease;
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 40px 0 60px; /* Increased padding */
+            margin-bottom: 70px;
+            position: relative;
         }
-        header h1 {
-            font-size: 3.4em; color: var(--text-color-accent); margin-bottom: 0.6em;
-            font-weight: 700; letter-spacing: -1px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: color var(--transition-speed) ease;
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem); /* Responsive font size */
+            color: var(--text-color-heading);
+            margin-bottom: 0.5em;
+            font-weight: 800; /* Extra bold */
+            letter-spacing: -1.5px;
+            line-height: 1.2;
+            background: linear-gradient(90deg, var(--accent-primary), color-mix(in srgb, var(--accent-primary) 60%, var(--accent-secondary) 40%));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: color var(--transition-medium) var(--ease-out-quad); /* H1 color won't change with this gradient text */
         }
-        header .tagline {
-            font-size: 1.55em; color: var(--text-color-primary); margin-bottom: 30px;
-            font-weight: 400; line-height: 1.6;
-            transition: color var(--transition-speed) ease;
+        .hero .tagline {
+            font-size: clamp(1.1rem, 3vw, 1.6rem);
+            color: var(--text-color-primary);
+            margin-bottom: 1.5em;
+            font-weight: 500;
+            max-width: 750px;
+            margin-left: auto; margin-right: auto;
+            line-height: 1.6;
+            transition: color var(--transition-medium) var(--ease-out-quad);
         }
-        header .intro-text {
-            font-size: 1.2em; color: var(--text-color-secondary); max-width: 800px;
-            margin-left: auto; margin-right: auto; line-height: 1.8;
-            transition: color var(--transition-speed) ease;
+        .hero .intro-text {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: var(--text-color-secondary);
+            max-width: 700px;
+            margin-left: auto; margin-right: auto;
+            line-height: 1.7;
+            transition: color var(--transition-medium) var(--ease-out-quad);
         }
 
+        /* General Section Styling */
         section {
-            margin-bottom: 70px; opacity: 0; transform: translateY(50px);
-            transition: opacity 0.7s var(--transition-bezier), transform 0.7s var(--transition-bezier);
+            margin-bottom: 80px; opacity: 0; transform: translateY(60px);
+            transition: opacity 0.8s var(--ease-out-quad), transform 0.8s var(--ease-out-quad);
         }
         section.visible { opacity: 1; transform: translateY(0); }
 
         h2 {
-            font-size: 2.6em; color: var(--text-color-accent-dark);
-            border-bottom: 3px solid var(--text-color-accent);
-            padding-bottom: 20px; margin-top: 0; margin-bottom: 45px;
-            font-weight: 700; text-align: center; letter-spacing: -0.5px;
-            transition: color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            color: var(--text-color-heading);
+            padding-bottom: 20px; margin-top: 0; margin-bottom: 50px;
+            font-weight: 700; text-align: center; letter-spacing: -0.8px;
+            position: relative;
+            transition: color var(--transition-medium) var(--ease-out-quad);
         }
-        h2 .emoji { vertical-align: middle; transition: transform 0.4s ease; }
-        h2:hover .emoji { transform: rotate(20deg) scale(1.15); }
+        h2::after { /* Subtle underline accent */
+            content: '';
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 70px; height: 4px;
+            background-color: var(--accent-primary);
+            border-radius: 2px;
+            transition: background-color var(--transition-medium) var(--ease-out-quad);
+        }
+        .section-icon { /* For SVG icons in H2 */
+            width: 1.2em; height: 1.2em;
+            margin-right: 0.5em;
+            vertical-align: -0.15em;
+            fill: currentColor; /* Icon color will match text color */
+            transition: transform 0.4s var(--ease-out-quad);
+        }
+        h2:hover .section-icon { transform: rotate(10deg) scale(1.1); }
 
         .section-intro {
-            font-size: 1.25em; color: var(--text-color-secondary); margin-bottom: 40px;
-            line-height: 1.8; text-align: center; max-width: 850px;
-            margin-left: auto; margin-right: auto;
-            transition: color var(--transition-speed) ease;
+            font-size: clamp(1.05rem, 2.8vw, 1.25rem); color: var(--text-color-secondary);
+            margin-bottom: 40px; line-height: 1.8; text-align: center;
+            max-width: 800px; margin-left: auto; margin-right: auto;
+            transition: color var(--transition-medium) var(--ease-out-quad);
         }
 
-        .value-prop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 35px; }
+        /* Value Proposition Section */
+        .value-prop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 35px; }
         .value-prop-item {
             background-color: var(--card-bg-color); padding: 30px;
-            border-radius: var(--border-radius);
-            border-left: 6px solid var(--text-color-accent);
-            box-shadow: 0 5px 15px var(--shadow-color);
-            transition: transform var(--transition-speed) var(--transition-bezier), box-shadow var(--transition-speed) var(--transition-bezier), background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--card-border-color);
+            box-shadow: 0 6px 18px var(--shadow-color);
+            transition: transform var(--transition-medium) var(--ease-in-out-cubic), box-shadow var(--transition-medium) var(--ease-in-out-cubic), background-color var(--transition-medium) var(--ease-out-quad), border-color var(--transition-medium) var(--ease-out-quad);
+            backdrop-filter: blur(8px) saturate(120%); /* Subtle glass for these too */
+            -webkit-backdrop-filter: blur(8px) saturate(120%);
         }
         .value-prop-item:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 10px 25px var(--shadow-color);
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 12px 30px var(--shadow-color);
+        }
+        .value-prop-item .vp-icon {
+            width: 36px; height: 36px;
+            fill: var(--accent-primary);
+            margin-bottom: 18px;
+            transition: fill var(--transition-medium) var(--ease-out-quad);
         }
         .value-prop-item h4 {
-            font-size: 1.4em; color: var(--text-color-accent-dark); margin-top: 0; margin-bottom: 12px;
-            font-weight: 600; transition: color var(--transition-speed) ease;
+            font-size: 1.5em; color: var(--text-color-heading); margin-top: 0; margin-bottom: 12px;
+            font-weight: 600; letter-spacing: -0.3px;
+            transition: color var(--transition-medium) var(--ease-out-quad);
         }
-        .value-prop-item p { font-size: 1.05em; color: var(--text-color-secondary); margin:0; transition: color var(--transition-speed) ease; }
+        .value-prop-item p { font-size: 1.05em; color: var(--text-color-secondary); margin:0; transition: color var(--transition-medium) var(--ease-out-quad); }
 
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 40px; }
+        /* Core Features Section */
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; }
         .feature-card {
-            background-color: var(--card-bg-color); border: 1px solid var(--border-color);
-            border-radius: var(--border-radius); padding: 35px;
-            box-shadow: 0 8px 20px var(--shadow-color);
-            transition: transform var(--transition-speed) var(--transition-bezier), box-shadow var(--transition-speed) var(--transition-bezier), background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--card-border-color);
+            border-radius: var(--border-radius-md); padding: 35px;
+            box-shadow: var(--card-shadow);
+            transition: transform var(--transition-medium) var(--ease-in-out-cubic), box-shadow var(--transition-medium) var(--ease-in-out-cubic), background-color var(--transition-medium) var(--ease-out-quad), border-color var(--transition-medium) var(--ease-out-quad);
             display: flex; flex-direction: column; text-align: left;
-            position: relative; overflow: hidden; /* For glare */
-            transform-style: preserve-3d;
+            position: relative; overflow: hidden;
+            backdrop-filter: blur(10px) saturate(140%);
+            -webkit-backdrop-filter: blur(10px) saturate(140%);
         }
         .feature-card:hover {
-            transform: translateY(-10px) rotateX(3deg) rotateY(-2deg) scale(1.03);
-            box-shadow: 0 15px 35px var(--shadow-color), 0 0 20px rgba(var(--text-color-accent-rgb), 0.1);
+            transform: translateY(-12px) perspective(1000px) rotateX(2deg) rotateY(-1deg) scale(1.02);
+            box-shadow: 0 20px 45px var(--shadow-color), 0 0 30px rgba(var(--accent-primary-rgb), 0.08);
         }
-        .feature-card::after { /* Glare effect */
-            content: ''; position: absolute; top: 0; left: -80%; width: 60%; height: 100%;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%);
-            transform: skewX(-25deg); opacity: 0; pointer-events: none;
-            transition: left 0.6s var(--transition-bezier), opacity 0.4s ease;
+        .feature-card .feature-icon {
+            width: 32px; height: 32px;
+            fill: var(--accent-primary);
+            margin-bottom: 20px;
+            transition: fill var(--transition-medium) var(--ease-out-quad), transform var(--transition-medium) var(--ease-in-out-cubic);
         }
-        body.dark-mode .feature-card::after { /* Dark mode glare */
-             background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0) 100%);
-        }
-        .feature-card:hover::after { left: 120%; opacity: 1; }
-
+        .feature-card:hover .feature-icon { transform: scale(1.1) rotate(-5deg); }
         .feature-card h3 {
-            font-size: 1.6em; color: var(--text-color-accent); margin-top: 0; margin-bottom: 20px;
-            font-weight: 600; transition: color var(--transition-speed) ease;
+            font-size: 1.65em; color: var(--text-color-heading); margin-top: 0; margin-bottom: 18px;
+            font-weight: 600; letter-spacing: -0.4px;
+            transition: color var(--transition-medium) var(--ease-out-quad);
         }
-        .feature-card h3 .emoji {
-            font-size: 1em; margin-right: 12px; display: inline-block;
-            transition: transform var(--transition-speed) var(--transition-bezier);
-        }
-        .feature-card:hover h3 .emoji { transform: rotate(-12deg) scale(1.25); }
-        .feature-card p { font-size: 1.1em; color: var(--text-color-secondary); margin:0; flex-grow: 1; line-height: 1.7; transition: color var(--transition-speed) ease; }
+        .feature-card p { font-size: 1.1em; color: var(--text-color-secondary); margin:0; flex-grow: 1; line-height: 1.7; transition: color var(--transition-medium) var(--ease-out-quad); }
 
+        /* API Endpoint Section */
+        #api-endpoint-test .endpoint-display {
+            background-color: rgba(var(--accent-primary-rgb), 0.05); /* Accent background */
+            border: 1px solid rgba(var(--accent-primary-rgb), 0.2);
+            padding: 22px 28px;
+            border-radius: var(--border-radius-md);
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            font-size: 1.2em; color: var(--text-color-primary);
+            margin-bottom: 30px; display: flex; align-items: center;
+            justify-content: space-between; word-break: break-all;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+            transition: background-color var(--transition-medium) var(--ease-out-quad), border-color var(--transition-medium) var(--ease-out-quad), color var(--transition-medium) var(--ease-out-quad);
+        }
+        #copy-api-url-btn {
+            background: var(--accent-primary); color: white;
+            border: none; padding: 12px 22px;
+            border-radius: var(--border-radius-md); cursor: pointer;
+            font-size: 1em; font-weight: 600; margin-left: 20px;
+            transition: background-color var(--transition-fast) var(--ease-out-quad), transform var(--transition-fast) var(--ease-in-out-cubic), box-shadow var(--transition-fast) var(--ease-out-quad);
+            white-space: nowrap; flex-shrink: 0;
+            box-shadow: 0 3px 8px rgba(var(--accent-primary-rgb), 0.25);
+        }
+        #copy-api-url-btn:hover {
+            background: var(--accent-primary-dark);
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 5px 12px rgba(var(--accent-primary-rgb), 0.35);
+        }
+        #copy-api-url-btn:disabled {
+            background-color: var(--text-color-secondary) !important; opacity: 0.7; cursor: default; transform: none; box-shadow: none;
+        }
+        #copy-api-url-btn .btn-icon { width: 1.1em; height: 1.1em; margin-right: 0.5em; vertical-align: -0.15em; fill: currentColor; }
+
+        #test-latency-btn {
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-primary-dark));
+            color: white; border: none; padding: 16px 32px;
+            border-radius: var(--border-radius-md); cursor: pointer;
+            font-size: 1.15em; font-weight: 600;
+            transition: opacity var(--transition-fast) var(--ease-out-quad), transform var(--transition-fast) var(--ease-in-out-cubic), box-shadow var(--transition-fast) var(--ease-in-out-cubic);
+            box-shadow: 0 6px 15px rgba(var(--accent-primary-rgb), 0.3);
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        #test-latency-btn:hover {
+            opacity: 0.9; transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(var(--accent-primary-rgb), 0.4);
+        }
+        #test-latency-btn:active { transform: translateY(-2px) scale(0.98); box-shadow: 0 4px 10px rgba(var(--accent-primary-rgb), 0.25); }
+        #latency-result {
+            font-size: 1.2em; font-weight: 600; color: var(--text-color-secondary);
+            min-width: 230px; text-align: left;
+            background-color: var(--highlight-bg); padding: 14px 20px;
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--border-color);
+            transition: background-color var(--transition-medium) var(--ease-out-quad), border-color var(--transition-medium) var(--ease-out-quad), color var(--transition-medium) var(--ease-out-quad);
+        }
+
+
+        /* Quick Start Section */
         .quick-start ol { list-style: none; padding-left: 0; counter-reset: quick-start-counter; }
         .quick-start li {
-            margin-bottom: 22px; padding: 22px 28px; padding-left: 70px;
-            background-color: var(--highlight-bg); border-radius: var(--border-radius);
+            margin-bottom: 25px; padding: 25px 30px; padding-left: 75px;
+            background-color: var(--highlight-bg); border-radius: var(--border-radius-md);
             font-size: 1.15em; position: relative;
             border: 1px solid var(--highlight-border);
-            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) var(--transition-bezier), border-color var(--transition-speed) ease;
-            box-shadow: 0 3px 8px rgba(var(--text-color-accent-rgb), 0.05);
+            transition: background-color var(--transition-medium) var(--ease-out-quad), transform var(--transition-medium) var(--ease-in-out-cubic), border-color var(--transition-medium) var(--ease-out-quad), box-shadow var(--transition-medium) var(--ease-in-out-cubic);
+            box-shadow: 0 4px 10px rgba(var(--accent-primary-rgb), 0.08);
         }
         .quick-start li:hover {
-            background-color: color-mix(in srgb, var(--highlight-bg) 75%, var(--text-color-accent) 25%);
-            transform: translateX(8px) scale(1.01);
+            background-color: color-mix(in srgb, var(--highlight-bg) 80%, var(--accent-primary) 20%);
+            transform: translateX(10px) scale(1.015);
+            box-shadow: 0 6px 15px rgba(var(--accent-primary-rgb), 0.12);
         }
         .quick-start li::before {
             counter-increment: quick-start-counter; content: counter(quick-start-counter);
-            position: absolute; left: 22px; top: 50%; transform: translateY(-50%);
-            background-color: var(--text-color-accent); color: var(--card-bg-color);
-            width: 38px; height: 38px; border-radius: 50%;
+            position: absolute; left: 25px; top: 50%; transform: translateY(-50%);
+            background: var(--accent-primary); color: white;
+            width: 40px; height: 40px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-weight: bold; font-size: 1.05em;
-            box-shadow: 0 3px 7px rgba(var(--text-color-accent-rgb), 0.3);
-            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            font-weight: 700; font-size: 1.1em;
+            box-shadow: 0 4px 10px rgba(var(--accent-primary-rgb), 0.35);
+            transition: background-color var(--transition-medium) var(--ease-out-quad), transform var(--transition-medium) var(--ease-in-out-cubic);
         }
-        .quick-start li strong { color: var(--text-color-accent-dark); font-weight: 600; transition: color var(--transition-speed) ease; }
-        
-        /* API Endpoint Section Refinements */
-        #api-endpoint-test .endpoint-display {
-            background-color: color-mix(in srgb, var(--card-bg-color) 95%, var(--highlight-bg) 5%);
-            border: 1px solid var(--border-color); padding: 20px 25px;
-            border-radius: var(--border-radius);
-            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-            font-size: 1.15em; color: var(--text-color-primary);
-            margin-bottom: 35px; display: flex; align-items: center;
-            justify-content: space-between; word-break: break-all;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.04);
-            transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease, color var(--transition-speed) ease;
-        }
-        #copy-api-url-btn {
-            background-color: var(--text-color-accent); color: var(--card-bg-color);
-            border: none; padding: 12px 20px;
-            border-radius: calc(var(--border-radius) - 2px); cursor: pointer;
-            font-size: 1em; font-weight: 600; margin-left: 20px;
-            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) var(--transition-bezier), box-shadow var(--transition-speed) ease;
-            white-space: nowrap; flex-shrink: 0;
-            box-shadow: 0 2px 5px rgba(var(--text-color-accent-rgb), 0.2);
-        }
-        #copy-api-url-btn:hover {
-            background-color: var(--text-color-accent-dark);
-            transform: scale(1.05) translateY(-1px);
-            box-shadow: 0 4px 8px rgba(var(--text-color-accent-rgb), 0.3);
-        }
-        #copy-api-url-btn:disabled {
-            background-color: var(--text-color-secondary); cursor: default; transform: none; box-shadow: none;
-        }
-        #test-latency-btn {
-            background-image: linear-gradient(60deg, var(--text-color-accent), color-mix(in srgb, var(--text-color-accent) 70%, var(--text-color-accent-dark) 30%));
-            color: white; border: none; padding: 15px 30px;
-            border-radius: var(--border-radius); cursor: pointer;
-            font-size: 1.15em; font-weight: 600;
-            transition: opacity var(--transition-speed) ease, transform var(--transition-speed) var(--transition-bezier), box-shadow var(--transition-speed) var(--transition-bezier);
-            box-shadow: 0 5px 12px var(--button-glow-color);
-        }
-        #test-latency-btn:hover {
-            opacity: 0.92; transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 7px 18px var(--button-glow-color);
-        }
-        #test-latency-btn:active { transform: translateY(-1px) scale(0.98); }
-        #latency-result {
-            font-size: 1.2em; font-weight: 600; color: var(--text-color-secondary);
-            min-width: 220px; text-align: left;
-            background-color: var(--highlight-bg); padding: 12px 18px;
-            border-radius: calc(var(--border-radius) - 2px);
-            border: 1px solid var(--border-color);
-            transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease, color var(--transition-speed) ease;
-        }
+        .quick-start li:hover::before { transform: translateY(-50%) scale(1.05); }
+        .quick-start li strong { color: var(--text-color-heading); font-weight: 600; transition: color var(--transition-medium) var(--ease-out-quad); }
 
-
+        /* Use Cases Section */
         .use-cases ul { columns: 2; gap: 40px; list-style: none; padding-left: 0; }
         .use-cases li {
             margin-bottom: 20px; font-size: 1.1em; color: var(--text-color-secondary);
             padding-left: 35px; position: relative;
-            transition: color var(--transition-speed) ease;
+            transition: color var(--transition-medium) var(--ease-out-quad), transform var(--transition-fast) var(--ease-out-quad);
         }
+        .use-cases li:hover { transform: translateX(5px); color: var(--text-color-primary); }
         .use-cases li::before {
-            content: '✓'; color: var(--text-color-accent); font-weight: bold; font-size: 1.15em;
-            position: absolute; left: 0; top: 1px;
-            transition: color var(--transition-speed) ease, transform var(--transition-speed) ease;
+            content: ''; /* Will use SVG icon */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23007AFF'%3E%3Cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clip-rule='evenodd' /%3E%3C/svg%3E");
+            width: 20px; height: 20px;
+            background-size: contain; background-repeat: no-repeat;
+            position: absolute; left: 0; top: 5px;
+            transition: transform var(--transition-medium) var(--ease-in-out-cubic);
+        }
+        body.dark-mode .use-cases li::before {
+             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%233B82F6'%3E%3Cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clip-rule='evenodd' /%3E%3C/svg%3E");
         }
         .use-cases li:hover::before { transform: scale(1.2); }
 
-        .developer-focus, .our-vision {
-            background-color: var(--highlight-bg); padding: 40px;
-            border-radius: var(--border-radius);
-            border-left: 8px solid var(--text-color-accent);
-            text-align: center; box-shadow: 0 5px 15px var(--shadow-color);
-            transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+
+        /* Emphasis Sections (Our Vision, Developer Focus) */
+        .emphasis-section {
+            background: linear-gradient(135deg, color-mix(in srgb, var(--card-bg-color) 90%, var(--accent-primary) 10%), color-mix(in srgb, var(--card-bg-color) 95%, var(--accent-primary) 5%));
+            padding: 45px;
+            border-radius: var(--border-radius-lg);
+            text-align: center; box-shadow: var(--card-shadow);
+            border: 1px solid var(--card-border-color);
+            transition: background var(--transition-medium) var(--ease-out-quad), border-color var(--transition-medium) var(--ease-out-quad);
         }
-        .developer-focus p, .our-vision p {
-            font-size: 1.3em; color: var(--text-color-primary); margin:0; line-height: 1.8;
-            transition: color var(--transition-speed) ease;
+        .emphasis-section .section-icon { width: 40px; height: 40px; margin-bottom: 15px; fill: var(--accent-primary); }
+        .emphasis-section h2 { border-bottom: none; margin-bottom: 20px; padding-bottom: 0; }
+        .emphasis-section h2::after { display: none; } /* Remove default H2 underline */
+        .emphasis-section p {
+            font-size: clamp(1.1rem, 3vw, 1.35rem); color: var(--text-color-primary);
+            margin:0; line-height: 1.8; max-width: 750px; margin-left: auto; margin-right: auto;
+            transition: color var(--transition-medium) var(--ease-out-quad);
         }
-        .developer-focus strong, .our-vision strong { color: var(--text-color-accent-dark); transition: color var(--transition-speed) ease; }
+        .emphasis-section strong { color: var(--accent-primary-dark); transition: color var(--transition-medium) var(--ease-out-quad); }
 
         footer {
-            text-align: center; margin-top: 80px; padding-top: 45px;
+            text-align: center; margin-top: 90px; padding-top: 50px;
             border-top: 1px solid var(--border-color);
             font-size: 1.05em; color: var(--text-color-secondary);
             position: relative; z-index: 1;
-            transition: border-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            transition: border-color var(--transition-medium) var(--ease-out-quad), color var(--transition-medium) var(--ease-out-quad);
         }
         footer p { margin-bottom: 15px; }
         footer a {
-            color: var(--text-color-accent); text-decoration: none; font-weight: 500;
-            transition: color var(--transition-speed) ease;
+            color: var(--accent-primary); text-decoration: none; font-weight: 500;
+            transition: color var(--transition-fast) var(--ease-out-quad), opacity 0.2s ease;
+            opacity: 0.9;
         }
-        footer a:hover { text-decoration: underline; color: var(--text-color-accent-dark); }
+        footer a:hover { text-decoration: none; color: var(--accent-primary-dark); opacity: 1; }
         
         #theme-toggle {
-            position: fixed;
-            bottom: 20px; /* Changed to bottom right */
-            right: 20px;
+            position: fixed; bottom: 25px; right: 25px;
             background: var(--card-bg-color);
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--card-border-color);
             color: var(--text-color-primary);
-            padding: 0;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 1000;
-            box-shadow: 0 3px 8px var(--shadow-color);
-            transition: background-color var(--transition-speed), transform var(--transition-speed), border-color var(--transition-speed) ease;
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3em; /* Make icon larger */
+            padding: 0; border-radius: 50%; cursor: pointer;
+            z-index: 1000; box-shadow: 0 4px 12px var(--shadow-color);
+            transition: background-color var(--transition-medium) var(--ease-out-quad), transform var(--transition-fast) var(--ease-in-out-cubic), border-color var(--transition-medium) var(--ease-out-quad), box-shadow var(--transition-fast) var(--ease-in-out-cubic);
+            width: 48px; height: 48px;
+            display: flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
         }
         #theme-toggle:hover {
             transform: scale(1.1) rotate(15deg);
-            border-color: var(--text-color-accent);
+            box-shadow: 0 6px 16px var(--shadow-color);
+            border-color: var(--accent-primary);
         }
-        .theme-icon-dark { display: none; } /* Initially hide dark icon */
+        #theme-toggle svg { width: 22px; height: 22px; fill: currentColor; }
+        .theme-icon-dark { display: none; }
         body.dark-mode .theme-icon-light { display: none; }
         body.dark-mode .theme-icon-dark { display: inline; }
 
-
-        @media (max-width: 900px) {
-            .features-grid { grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+        /* Responsive Adjustments */
+        @media (max-width: 992px) { /* Larger tablet / Small desktop */
+            .features-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
             .use-cases ul { columns: 1; }
         }
-        @media (max-width: 768px) {
-            body { padding-top: 20px; padding-bottom: 20px; }
-            .container-wrapper { padding-top: 20px; padding-bottom: 80px; /* Space for theme toggle */ }
-            .container { width: calc(100% - 30px); padding: 30px 25px; }
-            header h1 { font-size: 2.8em; }
-            header .tagline { font-size: 1.35em; }
-            h2 { font-size: 2.2em; }
-            .feature-card h3 { font-size: 1.45em; }
-            .endpoint-display { flex-direction: column; align-items: flex-start; gap: 12px; }
-            #copy-api-url-btn { margin-left: 0; align-self: flex-start; }
-        }
-        @media (max-width: 480px) {
-            header h1 { font-size: 2.3em; }
-            header .tagline { font-size: 1.2em; }
-            h2 { font-size: 1.9em; }
-            .section-intro, .value-prop-item p, .feature-card p, .use-cases li, .quick-start li { font-size: 1em; }
-            .developer-focus p, .our-vision p { font-size: 1.1em; }
+        @media (max-width: 768px) { /* Tablet */
+            body { padding-top: 0; padding-bottom: 0; } /* Remove body padding for edge-to-edge container on mobile */
+            .container-wrapper { padding-top: 30px; padding-bottom: 80px; }
+            .container { width: 100%; padding: 30px 25px; border-radius: 0; box-shadow: none; border-left:none; border-right:none; }
+            .hero h1 { font-size: clamp(2.2rem, 7vw, 3.5rem); }
+            .hero .tagline { font-size: clamp(1rem, 3.5vw, 1.4rem); }
+            h2 { font-size: clamp(1.6rem, 5vw, 2.4rem); }
+            .value-prop-grid { grid-template-columns: 1fr; }
+            .features-grid { grid-template-columns: 1fr; }
+            .endpoint-display { flex-direction: column; align-items: flex-start; gap: 15px; }
+            #copy-api-url-btn { margin-left: 0; align-self: stretch; text-align: center; }
             .latency-test-area { flex-direction: column; align-items: stretch; }
             #test-latency-btn { width: 100%; }
-            #latency-result { text-align: center; min-width: auto; }
-            #theme-toggle { bottom: 15px; right: 15px; width: 40px; height: 40px; font-size: 1.2em;}
+             #latency-result { text-align: center; min-width: auto; }
         }
+        @media (max-width: 480px) { /* Mobile */
+            .hero h1 { letter-spacing: -1px; }
+            .hero .tagline { max-width: 90%;}
+            .section-intro { font-size: clamp(0.95rem, 3vw, 1.15rem); }
+            .value-prop-item h4, .feature-card h3 { font-size: 1.35em; }
+            .quick-start li, #api-endpoint-test .endpoint-display { font-size: 1.05em; }
+            #theme-toggle { bottom: 20px; right: 20px; width: 44px; height: 44px; }
+            #theme-toggle svg { width: 20px; height: 20px; }
+        }
+
+        /* Utility for sr-only */
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
     </style>
 </head>
 <body>
+    <!-- SVG Icons Definition (can be moved to a separate file or JS for cleaner HTML) -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="icon-sun" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M12 12a5 5 0 100-10 5 5 0 000 10z"></path></symbol>
+        <symbol id="icon-moon" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></symbol>
+        <symbol id="icon-target" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 0c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0-8a8 8 0 100 16 8 8 0 000-16z"></path></symbol>
+        <symbol id="icon-rocket" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0zM11 4.05A21.516 21.516 0 003.55 11m16.9 0c-.032-1.692-.398-3.302-.997-4.788M3.55 11h16.9m-16.9 0a21.509 21.509 0 009.97 4.788M11 19.95A21.516 21.516 0 0020.45 13"></path></symbol> <!-- Placeholder, better rocket icon needed -->
+        <symbol id="icon-chip" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3H4a1 1 0 00-1 1v16a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1h-5m-4 0V3m0 0h4m-4 0a2 2 0 100 4 2 2 0 000-4zm0 14v-4m0 0a2 2 0 100 4 2 2 0 000-4z"></path></symbol>
+        <symbol id="icon-code" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></symbol>
+        <symbol id="icon-copy" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8 2a2 2 0 00-2 2v8a2 2 0 002 2h2a2 2 0 002-2V4a2 2 0 00-2-2H8zm2-2a4 4 0 00-4 4v8a4 4 0 004 4h2a4 4 0 004-4V4a4 4 0 00-4-4H10zM4 8a1 1 0 011-1h1V5a1 1 0 112 0v2h1a1 1 0 110 2H7v2a1 1 0 11-2 0V9H4a1 1 0 01-1-1z" clip-rule="evenodd" /></symbol>
+        <symbol id="icon-check" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></symbol>
+        <symbol id="icon-link" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></symbol>
+        <symbol id="icon-tools" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></symbol>
+        <!-- Add more SVGs as needed -->
+    </svg>
+
     <button id="theme-toggle" title="切换主题">
-        <span class="emoji theme-icon-light">☀️</span>
-        <span class="emoji theme-icon-dark">🌙</span>
+        <svg class="theme-icon-light"><use xlink:href="#icon-sun"></use></svg>
+        <svg class="theme-icon-dark"><use xlink:href="#icon-moon"></use></svg>
+        <span class="sr-only">切换主题</span>
     </button>
-    <div class="floating-shapes">
-        <span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span>
+
+    <div class="background-layers">
+        <div class="bg-gradient"></div>
+        <div class="bg-grid"></div>
+        <!-- Floating shapes are now part of the .background-layers for better z-index control,
+             but they are CSS-only and don't need to be here. Kept the CSS though.
+        <div class="floating-shapes">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        -->
     </div>
+
     <div class="container-wrapper">
         <div class="container">
-            <header class="reveal">
-                <h1><span class="emoji">⚡</span>欢迎使用 极氪AI</h1>
-                <p class="tagline">赋能未来的智能API中枢。<br>您的一站式 AI API 聚合、优化与智能分发解决方案。</p>
+            <header class="hero reveal">
+                <h1>欢迎使用 <span style="white-space: nowrap;">极氪AI</span></h1>
+                <p class="tagline">驱动下一代智能应用的强大引擎。<br>您的一站式 AI API 聚合、优化与智能分发中枢。</p>
                 <p class="intro-text">
                     极氪AI (ZeekrAI) 致力于为全球开发者与创新企业提供一个前所未有般简洁、极致高效且高度可靠的平台，帮助您无缝集成全球领先的 AI 模型，专注于核心业务创新，加速智能应用的研发、部署与迭代。
                 </p>
             </header>
 
-            <section id="our-vision" class="our-vision reveal">
-                <h2><span class="emoji">🔭</span>我们的愿景</h2>
+            <section id="our-vision" class="emphasis-section reveal">
+                 <h2>
+                    <svg class="section-icon"><use xlink:href="#icon-target"></use></svg>
+                    我们的愿景
+                </h2>
                 <p>成为连接尖端 AI 技术与实际应用场景的<strong>核心桥梁</strong>，让每一位创造者都能轻松驾驭强大的 AI 能力，共同塑造智能化未来。</p>
             </section>
 
             <section id="why-zeekr-ai" class="reveal">
-                <h2><span class="emoji">🎯</span>为何选择 极氪AI？</h2>
+                <h2>
+                    <svg class="section-icon"><use xlink:href="#icon-target"></use></svg> <!-- Placeholder, better icon needed -->
+                    为何选择 极氪AI？
+                </h2>
                 <p class="section-intro">在日新月异的 AI 领域，效率、成本与稳定性是您成功的基石。极氪AI 通过以下核心价值，为您的创新之旅保驾护航：</p>
                 <div class="value-prop-grid">
                     <div class="value-prop-item reveal">
-                        <h4><span class="emoji">✨</span>极致便捷，即刻上手</h4>
+                        <svg class="vp-icon"><use xlink:href="#icon-chip"></use></svg> <!-- Placeholder icon -->
+                        <h4>极致便捷，即刻上手</h4>
                         <p>通过统一、标准化的 API 接口，告别繁琐的多供应商适配工作。数分钟内即可完成集成，让您的团队专注于核心业务逻辑，而非底层接口的复杂性。</p>
                     </div>
                     <div class="value-prop-item reveal">
-                        <h4><span class="emoji">📈</span>卓越性能，成本优选</h4>
+                         <svg class="vp-icon"><use xlink:href="#icon-rocket"></use></svg> <!-- Placeholder icon -->
+                        <h4>卓越性能，成本优选</h4>
                         <p>先进的智能路由与动态负载均衡技术，确保API请求高效分配至最佳可用渠道。透明化的模型定价与精细化用量控制，助您显著优化AI服务成本。</p>
                     </div>
                     <div class="value-prop-item reveal">
-                        <h4><span class="emoji">🛡️</span>企业级可靠与安全</h4>
+                         <svg class="vp-icon"><use xlink:href="#icon-target"></use></svg> <!-- Placeholder icon, shield better -->
+                        <h4>企业级可靠与安全</h4>
                         <p>基于高可用、可扩展的稳健架构设计，提供企业级服务保障。精细的访问令牌与权限管理机制，确保您的数据与服务安全无虞，满足严苛应用需求。</p>
                     </div>
                 </div>
             </section>
 
             <section id="core-features" class="reveal">
-                <h2><span class="emoji">🌟</span>极氪AI 核心功能</h2>
+                 <h2>
+                    <svg class="section-icon"><use xlink:href="#icon-chip"></use></svg> <!-- Placeholder, better icon -->
+                    极氪AI 核心功能
+                </h2>
                 <div class="features-grid">
                     <div class="feature-card reveal">
-                        <h3><span class="emoji">🌐</span>全域模型聚合</h3>
+                        <svg class="feature-icon"><use xlink:href="#icon-target"></use></svg> <!-- Placeholder -->
+                        <h3>全域模型聚合</h3>
                         <p>轻松集成并管理来自 OpenAI (GPT系列), Azure OpenAI, Anthropic (Claude系列), Google (Vertex AI/Gemini), 百度文心一言, 阿里通义千问, 讯飞星火等全球主流及自定义 API 渠道。</p>
                     </div>
                     <div class="feature-card reveal">
-                        <h3><span class="emoji">🔗</span>标准化统一访问</h3>
+                        <svg class="feature-icon"><use xlink:href="#icon-link"></use></svg>
+                        <h3>标准化统一访问</h3>
                         <p>通过极氪AI 提供的单一、标准化 API 格式调用不同供应商的模型，大幅降低集成难度与后期维护成本，实现模型间的无缝切换与灵活调度。</p>
                     </div>
                     <div class="feature-card reveal">
-                        <h3><span class="emoji">💡</span>智能路由与优化</h3>
+                         <svg class="feature-icon"><use xlink:href="#icon-target"></use></svg> <!-- Placeholder, better icon -->
+                        <h3>智能路由与优化</h3>
                         <p>根据渠道的实时可用性、响应延迟、自定义权重、成本效益或特定业务规则，动态智能分配 API 请求，确保服务的高可用性与最佳性能表现。</p>
                     </div>
                     <div class="feature-card reveal">
-                        <h3><span class="emoji">🔑</span>精细化访问控制</h3>
+                        <svg class="feature-icon"><use xlink:href="#icon-target"></use></svg> <!-- Placeholder, key/lock icon -->
+                        <h3>精细化访问控制</h3>
                         <p>为不同用户、应用或项目组设置独立的访问令牌 (API Keys)，并配置精细化的调用额度、模型访问权限、QPS/RPM 速率限制，有效管理和追踪资源消耗。</p>
                     </div>
                     <div class="feature-card reveal">
-                        <h3><span class="emoji">📊</span>深度洞察与分析</h3>
+                        <svg class="feature-icon"><use xlink:href="#icon-target"></use></svg> <!-- Placeholder, chart/graph icon -->
+                        <h3>深度洞察与分析</h3>
                         <p>实时记录每一次 API 调用日志，提供多维度的用量统计、成本分析、错误追踪与性能监控仪表盘，帮助您洞察使用模式，优化资源配置与战略决策。</p>
                     </div>
                     <div class="feature-card reveal">
-                        <h3><span class="emoji">💰</span>灵活计费与定制</h3>
+                        <svg class="feature-icon"><use xlink:href="#icon-target"></use></svg> <!-- Placeholder, currency icon -->
+                        <h3>灵活计费与定制</h3>
                         <p>支持自定义不同模型的计费倍率和价格策略，可针对不同用户分组或渠道设置差异化定价，满足多样化的商业运营需求，并支持预付费和按量付费模式。</p>
                     </div>
                 </div>
             </section>
             
             <section id="api-endpoint-test" class="reveal">
-                <h2><span class="emoji">🔗</span> 您的专属API端点</h2>
+                <h2>
+                    <svg class="section-icon"><use xlink:href="#icon-link"></use></svg>
+                    您的专属API端点
+                </h2>
                 <p class="section-intro">
                     通过以下统一API端点，即可开始调用极氪AI聚合的强大模型。我们建议您在集成前测试与服务器的连接延迟，以获得最佳体验。
                 </p>
                 <div class="endpoint-display reveal">
                     <code id="api-url-text">https://api.lhfcb.com/v1/chat/completions</code>
-                    <button id="copy-api-url-btn" title="复制API端点"><span class="emoji">📋</span>复制</button>
+                    <button id="copy-api-url-btn" title="复制API端点">
+                        <svg class="btn-icon"><use xlink:href="#icon-copy"></use></svg>复制
+                    </button>
                 </div>
                 <div class="latency-test-area reveal">
                     <button id="test-latency-btn">测试与服务器连接延迟</button>
@@ -510,7 +602,10 @@
             </section>
 
             <section id="use-cases" class="use-cases reveal">
-                <h2><span class="emoji">🚀</span>赋能您的多元化创新</h2>
+                <h2>
+                    <svg class="section-icon"><use xlink:href="#icon-rocket"></use></svg> <!-- Placeholder -->
+                    赋能您的多元化创新
+                </h2>
                 <p class="section-intro">无论您致力于构建何种类型的 AI 应用，极氪AI 都能提供坚实的技术后盾，激发无限可能：</p>
                 <ul>
                     <li>智能客服与对话机器人</li>
@@ -526,7 +621,10 @@
             </section>
 
             <section id="quick-start" class="quick-start reveal">
-                <h2><span class="emoji">🛠️</span>三步集成，即刻启程</h2>
+                <h2>
+                     <svg class="section-icon"><use xlink:href="#icon-tools"></use></svg>
+                    三步集成，即刻启程
+                </h2>
                 <ol>
                     <li class="reveal"><strong>配置模型渠道：</strong>前往「渠道管理」模块，简单几步即可添加并验证您的上游 AI 服务 API 密钥与配置。</li>
                     <li class="reveal"><strong>创建访问令牌：</strong>在「令牌管理」中，为您的应用或用户创建专属访问令牌，并分配合适的权限、模型访问范围与调用额度。</li>
@@ -534,8 +632,11 @@
                 </ol>
             </section>
             
-            <section id="developer-focus" class="developer-focus reveal">
-                <h2><span class="emoji">👨‍💻</span>为开发者而生，与创新者同行</h2>
+            <section id="developer-focus" class="emphasis-section reveal">
+                <h2>
+                    <svg class="section-icon"><use xlink:href="#icon-code"></use></svg>
+                    为开发者而生，与创新者同行
+                </h2>
                 <p>极氪AI 深知开发者的核心诉求。我们致力于提供<strong>极致简洁的API设计</strong>、<strong>全面清晰的技术文档</strong>、<strong>活跃的社区支持</strong>以及<strong>持续迭代的平台能力</strong>，让您能够专注于业务创新与价值实现，而非繁琐的底层集成工作。<strong>您的成功，即是我们的使命。</strong></p>
             </section>
 
@@ -554,6 +655,10 @@
         </div>
     </div>
     <script>
+        // JavaScript (Theme Toggle, Scroll Reveal, Latency Test, Copy URL)
+        // This remains largely the same as the previous good version,
+        // just ensure IDs and classes match if you changed any.
+
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
         // Theme Toggle
@@ -569,16 +674,16 @@
             localStorage.setItem('theme', theme);
         };
 
-        // Initialize theme
         const preferredTheme = localStorage.getItem('theme') || 
                                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         applyTheme(preferredTheme);
 
-        themeToggleBtn.addEventListener('click', () => {
-            const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
-            applyTheme(newTheme);
-        });
-
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => {
+                const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+                applyTheme(newTheme);
+            });
+        }
 
         // Scroll Reveal Animation
         const revealElements = document.querySelectorAll('.reveal');
@@ -586,29 +691,29 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    // Optional: Unobserve after first reveal for performance
+                     // Optional: Unobserve after first reveal for performance
                     // revealObserver.unobserve(entry.target);
                 }
             });
         }, {
-            threshold: 0.08, // Trigger a bit earlier
-            rootMargin: '0px 0px -30px 0px'
+            threshold: 0.1, // Adjust as needed
+            rootMargin: '0px 0px -50px 0px' // Trigger a bit before element fully visible
         });
 
         revealElements.forEach(el => {
             revealObserver.observe(el);
         });
 
-        // API Endpoint & Latency Test Logic (same as before, should adapt to CSS vars)
+        // API Endpoint & Latency Test Logic
         const testLatencyBtn = document.getElementById('test-latency-btn');
         const latencyResultEl = document.getElementById('latency-result');
         const apiUrlToTest = 'https://api.lhfcb.com/v1/chat/completions'; 
 
         if (testLatencyBtn && latencyResultEl) {
             testLatencyBtn.addEventListener('click', async () => {
-                latencyResultEl.textContent = '延迟：正在测试...';
+                latencyResultEl.innerHTML = '延迟：<span class="testing-dots">正在测试<span>.</span><span>.</span><span>.</span></span>';
                 latencyResultEl.style.color = 'var(--text-color-secondary)';
-                testLatencyBtn.disabled = true; // Disable button during test
+                testLatencyBtn.disabled = true;
 
                 const startTime = performance.now();
                 try {
@@ -629,47 +734,66 @@
                     const latencyAttempt = Math.round(endTime - startTime);
                     console.error('Latency test error:', error);
                     if (error.name === 'TypeError' && error.message.toLowerCase().includes('failed to fetch')) {
-                         latencyResultEl.textContent = '延迟：无法连接或CORS策略限制';
+                         latencyResultEl.textContent = '延迟：无法连接或CORS限制';
                     } else {
                          latencyResultEl.textContent = `延迟：测试失败 (${latencyAttempt}ms)`;
                     }
                     latencyResultEl.style.color = 'var(--danger-color)';
                 } finally {
-                    testLatencyBtn.disabled = false; // Re-enable button
+                    testLatencyBtn.disabled = false;
                 }
             });
         }
+        // Add CSS for testing-dots if you want animated dots
+        const styleSheet = document.createElement("style");
+        styleSheet.innerText = `
+        .testing-dots span {
+            animation: blink 1.4s infinite both;
+        }
+        .testing-dots span:nth-child(2) {
+            animation-delay: .2s;
+        }
+        .testing-dots span:nth-child(3) {
+            animation-delay: .4s;
+        }
+        @keyframes blink {
+            0% { opacity: .2; }
+            20% { opacity: 1; }
+            100% { opacity: .2; }
+        }`;
+        document.head.appendChild(styleSheet);
+
 
         // Copy to clipboard functionality
         const copyApiUrlBtn = document.getElementById('copy-api-url-btn');
         const apiUrlTextEl = document.getElementById('api-url-text');
 
         if (copyApiUrlBtn && apiUrlTextEl) {
+            const originalCopyBtnHTML = copyApiUrlBtn.innerHTML; // Store original HTML
             copyApiUrlBtn.addEventListener('click', () => {
                 const textToCopy = apiUrlTextEl.textContent.trim();
                 navigator.clipboard.writeText(textToCopy)
                     .then(() => {
-                        const originalHTML = copyApiUrlBtn.innerHTML;
-                        copyApiUrlBtn.innerHTML = '<span class="emoji">✅</span>已复制!';
+                        copyApiUrlBtn.innerHTML = '<svg class="btn-icon" style="width:1.1em; height:1.1em; margin-right:0.5em; vertical-align:-0.15em; fill:currentColor;"><use xlink:href="#icon-check"></use></svg>已复制!';
                         copyApiUrlBtn.disabled = true;
                         setTimeout(() => {
-                            copyApiUrlBtn.innerHTML = originalHTML;
+                            copyApiUrlBtn.innerHTML = originalCopyBtnHTML;
                             copyApiUrlBtn.disabled = false;
-                        }, 2000);
+                        }, 2500);
                     })
                     .catch(err => {
                         console.error('Failed to copy API URL:', err);
                         try { // Fallback
                             const textArea = document.createElement("textarea");
                             textArea.value = textToCopy;
+                            textArea.style.position = "fixed"; textArea.style.left = "-9999px";
                             document.body.appendChild(textArea);
                             textArea.focus(); textArea.select();
                             document.execCommand('copy');
                             document.body.removeChild(textArea);
-                            const originalHTML = copyApiUrlBtn.innerHTML;
-                            copyApiUrlBtn.innerHTML = '<span class="emoji">✅</span>已复制!';
+                            copyApiUrlBtn.innerHTML = '<svg class="btn-icon" style="width:1.1em; height:1.1em; margin-right:0.5em; vertical-align:-0.15em; fill:currentColor;"><use xlink:href="#icon-check"></use></svg>已复制!';
                             copyApiUrlBtn.disabled = true;
-                            setTimeout(() => { copyApiUrlBtn.innerHTML = originalHTML; copyApiUrlBtn.disabled = false; }, 2000);
+                            setTimeout(() => { copyApiUrlBtn.innerHTML = originalCopyBtnHTML; copyApiUrlBtn.disabled = false; }, 2500);
                         } catch (fallbackErr) {
                             alert('复制失败，请手动复制。');
                             console.error('Fallback copy failed:', fallbackErr);
